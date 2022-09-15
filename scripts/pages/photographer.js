@@ -32,7 +32,80 @@ function hideFilters()
 }
 
 async function displayData(dataPhotographer)  {
+    async function sortByLikes()
+    {   
+        medias = (await getMedias()).sort(function (a, b) 
+            {
+                 
+                return a.likes - b.likes;        
+            })
+                
+            let total_likes = 0
+            div__photo__section.innerHTML = '' 
+            medias.forEach(media => 
+            {
+                if (dataPhotographer.id === media.photographerId) 
+                {    
+                    const mediaModel = mediaFactory(media)     
+                    // Total likes         
+                    total_likes = total_likes + media.likes   
+                    const mediaCardDOM = mediaModel.getMediaCardDOM(); 
+                    div__photo__section.appendChild(mediaCardDOM)                        
+                    div_stat_likes.textContent = total_likes                              
+                }  
+            })
+            div_select.prepend(div_select_like)
+            hideFilters()
+    }
+
+    async function sortByDate()
+    {   
+        medias = (await getMedias()).sort(function (a, b) {
+             
+            return new Date(b.date) - new Date(a.date);            
+        })
+        
+        let total_likes = 0
+        div__photo__section.innerHTML = '' 
+            medias.forEach(media => {
+            if (dataPhotographer.id === media.photographerId) {    
+                const mediaModel = mediaFactory(media)     
+        // Total likes         
+                total_likes = total_likes + media.likes   
+                const mediaCardDOM = mediaModel.getMediaCardDOM(); 
+                div__photo__section.appendChild(mediaCardDOM)                        
+                div_stat_likes.textContent = total_likes                             
+            }  
+        }) 
+        div_select.prepend(div_select_date)
+        hideFilters()   
+    }
     
+    async function sortByName()
+    {
+        medias = (await getMedias()).sort(function (a, b) {
+             
+            if(a.title < b.title) return -1; 
+            if(a.title > b.title) return 1;
+            return 0;         
+        })
+        
+        let total_likes = 0
+        div__photo__section.innerHTML = '' 
+            medias.forEach(media => {
+            if (dataPhotographer.id === media.photographerId) {    
+                const mediaModel = mediaFactory(media)     
+                // Total likes         
+                total_likes = total_likes + media.likes   
+                const mediaCardDOM = mediaModel.getMediaCardDOM(); 
+                div__photo__section.appendChild(mediaCardDOM)                        
+                div_stat_likes.textContent = total_likes                             
+             }  
+        }) 
+        div_select.prepend(div_select_name)
+        hideFilters()               
+    }
+
     const header_logo = document.querySelector('.logo')
     header_logo.setAttribute('alt', 'Fisheye Home page')
     header_logo.setAttribute('class', 'logo clickable')
@@ -71,6 +144,16 @@ async function displayData(dataPhotographer)  {
     div_select_like.setAttribute('class', 'filter-like filter-option')
     div_select_like.textContent = 'Popularité'
     div_select_like.setAttribute('tabindex', '0')
+    div_select_like.addEventListener('click', sortByLikes) 
+    div_select_like.addEventListener('keydown', async function (e) 
+    {
+        let code = e.code
+        if(code == 'Enter') 
+        {
+            sortByLikes()
+            img_menu_extend.focus()
+        }
+    })
 
     //Expend icon
     const img_menu_extend = document.createElement('i')
@@ -98,12 +181,33 @@ async function displayData(dataPhotographer)  {
     const div_select_name = document.createElement('div')
     div_select_name.setAttribute('class', 'filter-name filter-option')
     div_select_name.setAttribute('tabindex', '0')
+    div_select_name.addEventListener('click', sortByName) 
+    div_select_name.addEventListener('keydown', async function(e) 
+    {
+        let code = e.code
+        if(code == 'Enter') 
+        {
+            sortByName()
+            img_menu_extend.focus()
+        }
+    })
     div_select_name.textContent = 'Titre'
     
     // Option by date
     const div_select_date = document.createElement('div')
     div_select_date.setAttribute('class', 'filter-date filter-option')
     div_select_date.setAttribute('tabindex', '0')
+    div_select_date.addEventListener('click', sortByDate) 
+    div_select_date.addEventListener('keydown', async function (e) 
+    {
+        let code = e.code
+        if(code == 'Enter') 
+        {
+            sortByDate()
+            img_menu_extend.focus()
+        }
+        img_menu_extend.focus()
+    })
     div_select_date.textContent = 'Date'
     
     // Photographer's name on Modal
