@@ -275,8 +275,54 @@ async function displayData(dataPhotographer)  {
     div_stat_price.setAttribute('class', 'price')
     div_stat_price.textContent = dataPhotographer.price + ' € / jour'
     document.querySelector('body').append(div_stat_photographer)
+    
+    //Lightbox
+    const div_lightbox = document.createElement('div')
+    div_lightbox.setAttribute('class', 'lightbox')
+    div_lightbox.setAttribute('class', 'lightbox')
+    div_lightbox.setAttribute('id', 'lightbox')
+    div_lightbox.setAttribute('aria-hidden', 'true')
+    div_lightbox.setAttribute('role', 'dialog')
+    const lightbox_img_info = document.createElement('div')
+    lightbox_img_info.setAttribute('class', 'lightbox_img_info')
+    document.querySelector('body').appendChild(div_lightbox)
+     
+    //Lightbox Button Previous
+    const img_navigation_previous = document.createElement('img')
+    img_navigation_previous.setAttribute('class', 'lightbox_navigation-previous')
+    img_navigation_previous.setAttribute('src', '../assets/icons/expand_more-24px5.svg')
+    div_lightbox.appendChild(img_navigation_previous)
+    document.querySelector('.lightbox_navigation-previous').addEventListener('click', previousLightbox)
+    
+    // Lightbox  video    
+    const vid_main_image = document.createElement('video')
+    vid_main_image.setAttribute('class', 'lightbox-video')
+    vid_main_image.setAttribute('type', 'video/mp4')
+    vid_main_image.setAttribute('role', 'video')
+    const vid_source = document.createElement('source')
+    div_lightbox.appendChild(vid_main_image)
+    vid_main_image.appendChild(vid_source)
 
- 
+    // Lightbox  image   
+    const img_main_image = document.createElement('img')
+    img_main_image.setAttribute('class', 'lightbox_main-image')
+    img_main_image.setAttribute('src', '')
+    div_lightbox.appendChild(img_main_image)
+                                                    
+    // Lightbox Button Next
+    const img_navigation_next = document.createElement('img')
+    img_navigation_next.setAttribute('class', 'lightbox_navigation-next')
+    img_navigation_next.setAttribute('src', '../assets/icons/expand_more-24px5.svg')
+    div_lightbox.appendChild(img_navigation_next)
+    document.querySelector('.lightbox_navigation-next').addEventListener('click',nextLightbox)
+    
+    //Lightbox Button Close
+    const img_navigation_close = document.createElement('img')
+    img_navigation_close.setAttribute('class', 'lightbox_navigation-close')
+    img_navigation_close.setAttribute('src', '../assets/icons/close-24px 1.svg')
+    div_lightbox.appendChild(img_navigation_close)
+    document.querySelector('.lightbox_navigation-close').addEventListener('click', closeLightbox)
+    div_lightbox.appendChild(lightbox_img_info)   
 
     // Section top: Photographer infos
     const div__intro = document.createElement('div')
