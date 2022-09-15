@@ -81,13 +81,18 @@ function  mediaFactory(data) {
                        
             filled_heart_icon.style.display = 'flex'
             empty_heart_icon.style.display = 'none'
-                     
+            let count_likes = likes + 1
+            img_likes.textContent = count_likes
+            document.querySelector('.likes').textContent = parseInt(document.querySelector('.likes').textContent) + 1         
         })
         empty_heart_icon.addEventListener('keydown', function(e) {
             let code = e.code
             if(code == 'Enter'){
                 filled_heart_icon.style.display = 'flex'
                 empty_heart_icon.style.display = 'none'
+                let count_likes = likes + 1
+                img_likes.textContent = count_likes
+                document.querySelector('.likes').textContent = parseInt(document.querySelector('.likes').textContent) + 1
                 filled_heart_icon.focus()                              
             } 
 
@@ -102,7 +107,7 @@ function  mediaFactory(data) {
             filled_heart_icon.style.display = 'none'
             empty_heart_icon.style.display = 'flex' 
             img_likes.textContent = likes
-    
+            document.querySelector('.likes').textContent = parseInt(document.querySelector('.likes').textContent) - 1
             
         })
         filled_heart_icon.addEventListener('keydown', function(e) {
@@ -111,6 +116,7 @@ function  mediaFactory(data) {
                 filled_heart_icon.style.display = 'none'
                 empty_heart_icon.style.display = 'flex'
                 img_likes.textContent = likes
+                document.querySelector('.likes').textContent = parseInt(document.querySelector('.likes').textContent) - 1
                 empty_heart_icon.focus()                           
             } 
 
