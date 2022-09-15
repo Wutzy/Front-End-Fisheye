@@ -106,6 +106,61 @@ async function displayData(dataPhotographer)  {
     div_select_date.setAttribute('tabindex', '0')
     div_select_date.textContent = 'Date'
     
+    // Photographer's name on Modal
+    const modal_contact_title = document.querySelector('header > h2')
+    modal_contact_title.setAttribute('id', 'modal_contact_title')
+    modal_contact_title.innerHTML = 'Contactez-moi </br>' + dataPhotographer.name
+    
+    
+    // Set a class attribut on div in form
+    const contact_form = document.querySelector('form div')
+    contact_form.setAttribute('class', 'contactForm')
+    contact_form.addEventListener('keydown', function (e) 
+    {
+        let code = e.code
+        if(code == 'Escape')
+        {                
+            return closeModal()
+        } 
+    })
+    // MODAL CONTACT: Adding alt attribut on send button and close button
+    const modal_contact = document.querySelector('.modal')
+    modal_contact.setAttribute('alt', 'Contact Me ' + dataPhotographer.name)
+    modal_contact.setAttribute('aria-labelledby', 'modal_contact_title') 
+    const modal_contact_button = document.querySelectorAll('.contact_button')
+    modal_contact_button[0].setAttribute('alt', 'Contact Me')
+    modal_contact_button[1].setAttribute('alt', 'Send')
+        
+    //Add Attributes for forname field
+    document.querySelector('.contactForm > label').setAttribute('for', 'forname')
+    const modal_input_forname = document.querySelector('.contactForm > input')
+    modal_input_forname.setAttribute('id', 'forname')
+    modal_input_forname.setAttribute('alt', 'First name')
+    
+    //Field Name
+    const modal_label_name = customCreateElement('label', 'for', 'name', 'Nom')
+    const modal_input_name = document.createElement('input')
+    modal_input_name.setAttribute('id', 'name')
+    modal_input_name.setAttribute('alt', 'Last name')
+    contact_form.appendChild(modal_label_name)
+    contact_form.appendChild(modal_input_name)
+    
+    //Field Email
+    const modal_label_email = customCreateElement('label', 'for', 'email', 'Email')
+    contact_form.appendChild(modal_label_email)
+    const modal_input_email = document.createElement('input')
+    modal_input_email.setAttribute('id', 'email')
+    modal_input_email.setAttribute('alt', 'Email')
+    contact_form.appendChild(modal_input_email)
+    
+    //Field Message
+    const modal_label_message = customCreateElement('label', 'for', 'message', 'Votre message')
+    contact_form.appendChild(modal_label_message)
+    const modal_input_message = document.createElement('input')
+    modal_input_message.setAttribute('id', 'message')
+    modal_input_message.setAttribute('alt', 'Your message')
+    contact_form.appendChild(modal_input_message)
+    
 
     // Rectangle like + price
     const div_stat_photographer = document.createElement('div')
