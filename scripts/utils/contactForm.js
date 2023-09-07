@@ -31,6 +31,7 @@ function closeModal() {
 function isValid () {
     const modal_input_email = document.getElementById('email').value
     const modal_input_name = document.getElementById('name').value
+    const modal_input_forname = document.getElementById('forname').value
     const modal_input_message = document.getElementById('message').value
 
     if (modal_input_email === '' || modal_input_name === '' || modal_input_message === '')
@@ -40,6 +41,12 @@ function isValid () {
             document.getElementById('name').style.border = 'solid 2px red'
         }else {
             document.getElementById('name').style.border = 'unset'
+        }
+        if (modal_input_forname === '')
+        {
+            document.getElementById('forname').style.border = 'solid 2px red'
+        }else {
+            document.getElementById('forname').style.border = 'unset'
         }
         if (modal_input_email === '')
         {
@@ -55,6 +62,7 @@ function isValid () {
         }
         return false;
     } else {
+        console.log('Prenom:' + modal_input_forname)
         console.log('Nom:' + modal_input_name)
         console.log('Email:' + modal_input_email)
         console.log('Message:' + modal_input_message)
